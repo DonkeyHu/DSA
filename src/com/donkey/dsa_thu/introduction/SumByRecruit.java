@@ -1,4 +1,4 @@
-package com.donkey.dsa_thu;
+package com.donkey.dsa_thu.introduction;
 
 /**
  * 数组求和：二分递归

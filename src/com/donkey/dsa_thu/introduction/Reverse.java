@@ -1,4 +1,4 @@
-package com.donkey.dsa_thu;
+package com.donkey.dsa_thu.introduction;
 /**
  * 数组倒置
  * 用递归or迭代的方法都ok，注意一下递归基的情况就行了

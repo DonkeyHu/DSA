@@ -1,4 +1,4 @@
-package com.donkey.dsa_thu;
+package com.donkey.dsa_thu.introduction;
 
 public class BubbleSort {
 	

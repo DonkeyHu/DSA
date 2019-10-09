@@ -1,4 +1,4 @@
-package com.donkey.dsa_thu;
+package com.donkey.dsa_thu.introduction;
 /**
  * 算法：有穷性
  * Hailstone Sequence 这是有穷的步骤吗？ 数学难题，没办法证明是正确的，也没找出是错误的

@@ -1,4 +1,4 @@
-package com.donkey.dsa_thu;
+package com.donkey.dsa_thu.introduction;
 /**
  * 查找一个数组中最大的两个数，要求比较次数尽量小
  * @author DonkeyHu
