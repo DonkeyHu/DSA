@@ -54,35 +54,85 @@ public class Max2 {
 	}
 	/*
 	 * 递归+分治：
+	 * JAVA 没有指针很恶心，不知怎么改变入参的值，只想到传入对象
 	 */
-	public static void max2(int a[],int lo,int hi,int x1,int x2) {
+	public static void max2(int a[],int lo,int hi,NumObj obj) {
 		if(lo+2==hi) {
-			System.out.println("最大的数："+a[x1]);
-			System.out.println("次大的数："+a[x2]);
+			if (a[lo] > a[lo+1]){
+				obj.x1 = lo ;
+				obj.x2 = lo + 1;
+			}else {
+				obj.x1 = lo + 1;
+				obj.x2 = lo;
+			}
 			return;
 		}
 		if(lo+3==hi) {
-			System.out.println("最大的数："+a[x1]);
-			System.out.println("次大的数："+a[x2]);
+			if (a[lo] > a[lo+1]){
+				obj.x1 = lo ;
+				obj.x2 = lo + 1;
+			}else {
+				obj.x1 = lo + 1;
+				obj.x2 = lo;
+			}
+			if (a[obj.x1] > a[lo+2]){
+				obj.x2 = a[obj.x2] > a[lo+2] ? obj.x2:lo+2;
+			}else {
+				obj.x2 = obj.x1;
+				obj.x1 = lo + 2;
+			}
 			return;
 		}
 		int mi=(lo+hi)/2;
-		int x1L = 0,x2L = 0;
-		max2(a,lo,mi,x1L,x2L);
-		int x1R = 0,x2R = 0;
-		max2(a,mi,hi,x1R,x2R);
+		NumObj left = new NumObj();
+		max2(a,lo,mi,left);
+		int x1L = left.x1,x2L = left.x2;
+		NumObj right = new NumObj();
+		max2(a,mi,hi,right);
+		int x1R = right.x1,x2R = right.x2;
 		if(a[x1L]>a[x1R]) {
-			x1=x1L;
-			x2=(a[x2L]>a[x1R])?x2L:x1R;
+			obj.x1=x1L;
+			obj.x2=(a[x2L]>a[x1R])?x2L:x1R;
 		}else {
-			x1=x1R;
-			x2=(a[x2R]>a[x1L])?x2R:x1L;
+			obj.x1=x1R;
+			obj.x2=(a[x2R]>a[x1L])?x2R:x1L;
 		}
-		
+		System.out.println("最大的数："+a[obj.x1]);
+		System.out.println("次大的数："+a[obj.x2]);
 	}
 	
 	public static void main(String[] args) {
 		int a[]= {4,3,8,5,10,19,12,31,9,78};
-		max2(a,0,a.length,0,0);
+		NumObj max = new NumObj();
+		max2(a,0,a.length,max);
+	}
+}
+
+class NumObj{
+	int x1;
+	int x2;
+
+	public NumObj() {
+	}
+
+	public NumObj(int x1, int x2) {
+		this.x1 = x1;
+		this.x2 = x2;
+	}
+
+	public int getX1() {
+		return x1;
+	}
+
+	public void setX1(int x1) {
+		this.x1 = x1;
+	}
+
+	public int getX2() {
+		return x2;
+	}
+
+	public void setX2(int x2) {
+		this.x2 = x2;
 	}
 }

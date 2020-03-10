@@ -9,8 +9,8 @@ import java.util.Arrays;
  */
 public class MergeSort {
 	public static void main(String[] args) {
-		int[] a = {12,11,10,9,8,7,6,5};
-		mergeSort(a,0,8);
+		int[] a = {12,11,10,9,8,7,6,5,22,19,30};
+		mergeSort(a,0,11);
 		System.out.println("结果为："+Arrays.toString(a));
 	}
 	

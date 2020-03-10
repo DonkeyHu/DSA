@@ -11,8 +11,10 @@
 *.zip
 *.tar.gz
 *.rar
+out
 
 /bin/
 .project
 .classpath
 .settings
+.idea
