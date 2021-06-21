@@ -1,6 +1,5 @@
 # Compiled class file
 *.class
-/target/
 
 # Log file
 *.log
@@ -11,7 +10,6 @@
 *.zip
 *.tar.gz
 *.rar
-out
 
 /bin/
 .project
