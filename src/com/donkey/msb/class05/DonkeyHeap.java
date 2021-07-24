@@ -1,5 +1,8 @@
 package com.donkey.msb.class05;
 
+/**
+ * 堆：大根堆/小根堆
+ */
 public class DonkeyHeap {
 
     public static class MyMaxHeap {
