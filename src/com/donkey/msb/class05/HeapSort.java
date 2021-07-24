@@ -50,9 +50,9 @@ public class HeapSort {
     }
 
     public static int[] generateRondomArray(int maxLen, int maxValue) {
-        int[] arr = new int[(int) Math.random() * maxLen + 1];
+        int[] arr = new int[(int) (Math.random() * maxLen) + 1];
         for (int i = 0; i < arr.length; i++) {
-            arr[i] = ((int) Math.random() * maxValue + 1) - ((int) Math.random() * maxValue + 1);
+            arr[i] = ((int) (Math.random() * maxValue) + 1) - ((int) (Math.random() * maxValue) + 1);
         }
         return arr;
     }
