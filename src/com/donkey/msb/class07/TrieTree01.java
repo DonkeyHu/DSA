@@ -41,6 +41,57 @@ public class TrieTree01 {
             }
             node.end++;
         }
-    }
 
+        // 这个单词出现过几次
+        public int search(String word) {
+            if (word == null) {
+                return 0;
+            }
+            char[] str = word.toCharArray();
+            Node1 node = this.root;
+            for (int i = 0; i < str.length; i++) {
+                int x = str[i] - 'a';
+                if (node.nexts[x] == null) {
+                    return 0;
+                }
+                node = node.nexts[x];
+            }
+            return node.end;
+        }
+
+        public void delete(String word) {
+            if (search(word) == 0) {
+                return;
+            }
+            char[] str = word.toCharArray();
+            Node1 node = this.root;
+            node.pass--;
+            for (int i = 0; i < str.length; i++) {
+                int x = str[i] - 'a';
+                // 这里这个判断是为什么呀？
+                if (--node.nexts[x].pass == 0) {
+                    node.nexts[x] = null;
+                    return;
+                }
+                node = node.nexts[x];
+            }
+            node.end--;
+        }
+
+        public int prefixNumber(String pre) {
+            if (pre == null) {
+                return 0;
+            }
+            char[] str = pre.toCharArray();
+            Node1 node = this.root;
+            for (int i = 0; i < str.length; i++) {
+                int x = str[i] - 'a';
+                if (node.nexts[x] == null){
+                    return 0;
+                }
+                node = node.nexts[x];
+            }
+            return node.pass;
+        }
+    }
 }
