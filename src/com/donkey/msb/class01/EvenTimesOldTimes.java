@@ -50,7 +50,7 @@ public class EvenTimesOldTimes {
             eor ^= arr[i];
         }
         int rightOne = eor & (-eor);
-
+        // rightOne的位置为1，这意味着这两个奇数在这个index的位置，其中一个是0，其中一个是1
         int eorx = 0;
 
         for (int i = 0; i < arr.length; i++) {

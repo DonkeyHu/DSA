@@ -13,7 +13,7 @@ public class BSExist {
         }
         int L = 0;
         int R = arr.length - 1;
-        int mid = 0;
+        int mid;
         // 这里很精妙解决边界条件的情况，LR至少两位数或者仅有两位数的情况
         while (L < R) {
             mid = L + ((R - L) >> 1); //这里注意移位符的优先级

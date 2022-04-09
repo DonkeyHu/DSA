@@ -7,7 +7,7 @@ import java.util.Arrays;
  */
 public class RadixSort {
 
-    // 非负数
+    // 范围限制 ：非负数，十进制的数
     public static void radixSort(int[] arr) {
         if (arr == null || arr.length <= 1) {
             return;
@@ -31,6 +31,7 @@ public class RadixSort {
     public static void radixSort(int[] arr, int L, int R, int digit) {
         int radix = 10;
         int[] help = new int[R - L + 1];
+        // 这里是没有桶的优化版本的基数排序
         for (int d = 1; d <= digit; d++) {
             int[] count = new int[radix];
             for (int v : arr) {
