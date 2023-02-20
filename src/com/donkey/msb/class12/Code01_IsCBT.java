@@ -49,4 +49,73 @@ public class Code01_IsCBT {
         }
         return true;
     }
+
+    public static class Info {
+        public boolean isCBT;
+        public boolean isFull;
+        public int height;
+
+        public Info(boolean isCBT, boolean isFull, int height) {
+            this.isCBT = isCBT;
+            this.isFull = isFull;
+            this.height = height;
+        }
+    }
+
+    public static Info process(Node node) {
+        if (node == null) {
+            return new Info(true, true, 0);
+        }
+        Info left = process(node.left);
+        Info right = process(node.right);
+        int height = Math.max(left.height, right.height) + 1;
+        boolean isFull = left.isFull && right.isFull && left.height == right.height;
+        boolean isCBT = false;
+        if (left.isCBT && right.isFull && left.height == right.height + 1) {
+            isCBT = true;
+        } else if (left.isFull && right.isCBT && left.height == right.height) {
+            isCBT = true;
+        } else if (left.isFull && right.isFull && left.height == right.height) {
+            isCBT = true;
+        } else if (left.isFull && right.isFull && left.height == right.height + 1) {
+            isCBT = true;
+        }
+        return new Info(isCBT, isFull, height);
+    }
+
+    public static boolean isCBT(Node head) {
+        if (head == null) {
+            return true;
+        }
+        return process(head).isCBT;
+    }
+
+    public static Node generateRandomBT(int maxLevel, int maxValue) {
+        return generate(1, maxLevel, maxValue);
+    }
+
+    public static Node generate(int level, int maxLevel, int maxValue) {
+        if (level > maxLevel || Math.random() < 0.4) {
+            return null;
+        }
+        Node head = new Node((int) (Math.random() * maxValue));
+        head.left = generate(level + 1, maxLevel, maxValue);
+        head.right = generate(level + 1, maxLevel, maxValue);
+        return head;
+    }
+
+    public static void main(String[] args) {
+        int maxLevel = 5;
+        int maxValue = 100;
+        int times = 10000000;
+        for (int i = 0; i < times; i++) {
+            Node node = generateRandomBT(maxLevel, maxValue);
+            if (isCBT(node) != isCBT1(node)) {
+                System.out.println("BUG");
+                return;
+            }
+        }
+        System.out.println("Finish");
+    }
+
 }
