@@ -8,4 +8,31 @@ package com.donkey.msb.class14;
  * 返回如果点亮str中所有需要点亮的位置，至少需要几盏灯
  */
 public class Code01_Light {
+
+    // 贪心解法
+    public static int minLight(String road) {
+        char[] arr = road.toCharArray();
+        int cur = 0;
+        int light = 0;
+        while (cur < arr.length) {
+            if (arr[cur] == 'X') {
+                cur++;
+            } else {
+                light++;
+                if (cur + 1 == arr.length) {
+                    break;
+                } else {
+                    if (arr[cur + 1] == 'X') {
+                        cur = cur + 2;
+                    } else {
+                        cur = cur + 3;
+                    }
+                }
+            }
+        }
+        return light;
+    }
+
+    // TODO 点灯问题暴力解搞不懂
+
 }
