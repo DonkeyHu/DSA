@@ -33,12 +33,7 @@ public class Code03_BestArrange {
         if (arr == null || arr.length == 0) {
             return 0;
         }
-        Arrays.sort(arr, new Comparator<Program>() {
-            @Override
-            public int compare(Program o1, Program o2) {
-                return o1.end - o2.end;
-            }
-        });
+        Arrays.sort(arr, (o1, o2) -> o1.end - o2.end);
         int ans = 0;
         int timeEnd = 0;
         for (int i = 0; i < arr.length; i++) {
