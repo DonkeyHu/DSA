@@ -92,9 +92,9 @@ public class Code01_Hanoi {
 
     public static void main(String[] args) {
         int n = 3;
-        hanoi1(3);
+        hanoi1(n);
         System.out.println("========");
-        hanoi2(3);
+        hanoi2(n);
     }
 
 
