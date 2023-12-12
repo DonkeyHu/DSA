@@ -103,7 +103,7 @@ public class Code02_CardsInLine {
         for (int i = 0; i < N; i++) {
             fmap[i][i] = arr[i];
         }
-
+        //如何构建这个三角形想了好久没想出来，心思杂了
         for (int col = 1; col < N; col++) {
             int L = 0;
             int R = col;
