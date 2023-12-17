@@ -66,6 +66,10 @@ public class Code02_ConvertToLetterString {
 
 
     public static void main(String[] args) {
+
+        char x = 0 +'0' + 49;
+        System.out.println(x);
+
         for (int i = 0; i < 10000; i++) {
             int len = (int) (Math.random() * 10);
             String s = generateRandomStr(len);
