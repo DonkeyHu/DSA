@@ -10,6 +10,8 @@ import java.util.Map;
  * 例子：str= "babac"，arr = {"ba","c","abcd"}
  * ba + ba + c  3  abcd + abcd 2  abcd+ba 2
  * 所以返回2
+ *
+ * 本题测试链接：https://leetcode.com/problems/stickers-to-spell-word
  */
 public class Code03_StickersToSpellWord {
 
@@ -148,7 +150,7 @@ public class Code03_StickersToSpellWord {
                 }
                 String rest = res.toString();
                 if (rest.length() != target.length()) {
-                    min = Math.min(min, process2(rest, arr));
+                    min = Math.min(min, process3(rest, arr,cache));
                 }
             }
         }
