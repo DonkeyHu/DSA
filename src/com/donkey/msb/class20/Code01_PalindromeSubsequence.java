@@ -34,6 +34,34 @@ public class Code01_PalindromeSubsequence {
     }
 
 
+    public static int dp(String s) {
+        if (s == null || s.length() == 0) {
+            return 0;
+        }
+
+        char[] arr = s.toCharArray();
+        int N = arr.length;
+        int[][] dp = new int[N][N];
+        dp[0][0] = 1;
+        for (int i = 1; i < N; i++) {
+            dp[i][i] = 1;
+            dp[i - 1][i] = arr[i - 1] == arr[i] ? 2 : 1;
+        }
+
+        for (int i = N - 3; i >= 0; i--) {
+            // 哎，这里填表都出错!
+            for (int j = i + 2; j < N; j++) {
+                int p1 = dp[i + 1][j - 1];
+                int p2 = dp[i + 1][j];
+                int p3 = dp[i][j - 1];
+                int p4 = arr[i] == arr[j] ? (2 + dp[i + 1][j - 1]) : 0;
+                dp[i][j] = Math.max(Math.max(p1, p2), Math.max(p3, p4));
+            }
+        }
+        return dp[0][N - 1];
+    }
+
+
     public static void main(String[] args) {
 
     }
