@@ -111,8 +111,39 @@ public class Code03_Coffee {
     }
 
 
-    public static void main(String[] args) {
+    public static int[] randomArr(int len, int max) {
+        int[] arr = new int[len];
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = (int) Math.random() * max + 1;
+        }
+        return arr;
+    }
 
+
+    public static void main(String[] args) {
+        int len = 10;
+        int max = 10;
+        int times = 10;
+        for (int i = 0; i < times; i++) {
+
+            int[] arr = randomArr(len, max);
+            int n = (int) (Math.random() * 7) + 1;
+            int a = (int) (Math.random() * 7) + 1;
+            int b = (int) (Math.random() * 10) + 1;
+
+            int ans1 = way1(arr, n, a, b);
+            int ans2 = way2(arr, n, a, b);
+            if (ans1 != ans2) {
+                System.out.println(arr.toString());
+                System.out.println("n : " + n);
+                System.out.println("a : " + a);
+                System.out.println("b : " + b);
+                System.out.println(ans1 + " , " + ans2);
+                System.out.println("===============");
+                break;
+            }
+        }
+        System.out.println("success!");
     }
 
 }
