@@ -33,6 +33,7 @@ public class Code02_SplitNumClosedHalfSize {
             return count == 0 ? 0 : -1;
         }
         int A = process(index + 1, rest, count, arr);
+        // 这里B的初始值赋值不能为0，初始值默认是无效解
         int B = -1;
         if (arr[index] <= rest) {
             int p = process(index + 1, rest - arr[index], count - 1, arr);
@@ -42,6 +43,54 @@ public class Code02_SplitNumClosedHalfSize {
         }
         return Math.max(A, B);
     }
+
+    public static int dp(int[] arr) {
+        if (arr == null || arr.length <= 1) {
+            return 0;
+        }
+        int sum = 0;
+        for (int i : arr) {
+            sum += i;
+        }
+        sum /= 2;
+        int N = arr.length;
+        int M = (N + 1) / 2;
+        int[][][] dp = new int[N + 1][sum + 1][M + 1];
+        for (int i = 0; i <= N; i++) {
+            for (int j = 0; j <= sum; j++) {
+                for (int k = 0; k <= M; k++) {
+                    dp[i][j][k] = -1;
+                }
+            }
+        }
+
+        for (int j = 0; j <= sum; j++) {
+            dp[N][j][0] = 0;
+        }
+
+        for (int index = N - 1; index >= 0; index--) {
+            for (int rest = 0; rest <= sum; rest++) {
+                for (int count = 0; count <= M; count++) {
+                    int A = dp[index + 1][rest][count];
+                    int B = -1;
+                    if (arr[index] <= rest && count >= 1) {
+                        int p = dp[index + 1][rest - arr[index]][count - 1];
+                        if (p != -1) {
+                            B = arr[index] + p;
+                        }
+                    }
+                    dp[index][rest][count] = Math.max(A, B);
+                }
+            }
+        }
+
+        if (N % 2 == 0) {
+            return dp[0][sum][N / 2];
+        } else {
+            return Math.max(dp[0][sum][N / 2], dp[0][sum][M]);
+        }
+    }
+
 
     // for test
     public static int[] randomArray(int len, int value) {
@@ -95,7 +144,7 @@ public class Code02_SplitNumClosedHalfSize {
     }
 
 
-            // for test
+    // for test
     public static void main(String[] args) {
         int maxLen = 10;
         int maxValue = 50;
@@ -106,12 +155,12 @@ public class Code02_SplitNumClosedHalfSize {
             int[] arr = randomArray(len, maxValue);
             int ans1 = right(arr);
             int ans2 = way1(arr);
-//            int ans3 = dp2(arr);
+            int ans3 = dp(arr);
             if (ans1 != ans2) {
                 printArray(arr);
                 System.out.println(ans1);
                 System.out.println(ans2);
-//                System.out.println(ans3);
+                System.out.println(ans3);
                 System.out.println("Oops!");
                 break;
             }
