@@ -60,4 +60,25 @@ public class Code02_AllTimeMinToMax {
         return max;
     }
 
+    public static int[] generateRandomArr() {
+        int[] res = new int[(int) (Math.random() * 10) + 10];
+        for (int i = 0; i < res.length; i++) {
+            res[i] = (int) (Math.random() * 100);
+        }
+        return res;
+    }
+
+    public static void main(String[] args) {
+        int times = 100000;
+        System.out.println("test start");
+        for (int i = 0; i < times; i++) {
+            int[] arr = generateRandomArr();
+            if (max(arr) != max2(arr)){
+                System.out.println("Fuck!");
+                break;
+            }
+        }
+        System.out.println("test done");
+    }
+
 }
