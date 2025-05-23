@@ -22,6 +22,7 @@ public class Code01_FindMinKth {
         int cur = L;
         while (cur < more) {
             if (arr[cur] < pivot) {
+                // 这里左边界有边界还是有点模糊的，脑海得有个数组的画面，左边界less恰好是小于pivot的数
                 swap(arr, cur++, ++less);
             } else if (arr[cur] > pivot) {
                 swap(arr, cur, --more);
