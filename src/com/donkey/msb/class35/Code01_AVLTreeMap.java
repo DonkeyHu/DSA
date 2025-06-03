@@ -121,10 +121,11 @@ public class Code01_AVLTreeMap {
             return balance(cur);
         }
 
-
-        public AVLNode<K, V> findK(K key) {
+        private AVLNode<K, V> findLastIndex(K key) {
+            AVLNode<K, V> pre = root;
             AVLNode<K, V> cur = root;
             while (cur != null) {
+                pre = cur;
                 if (key.compareTo(cur.k) == 0) {
                     break;
                 } else if (key.compareTo(cur.k) < 0) {
@@ -133,40 +134,125 @@ public class Code01_AVLTreeMap {
                     cur = cur.r;
                 }
             }
-            return cur;
+            return pre;
         }
 
-        public boolean containKey(K key) {
+        private AVLNode<K, V> findLastNoSmallIndex(K key) {
+            AVLNode<K, V> ans = null;
+            AVLNode<K, V> cur = root;
+            while (cur != null) {
+                if (key.compareTo(cur.k) == 0) {
+                    ans = cur;
+                    break;
+                } else if (key.compareTo(cur.k) < 0) {
+                    ans = cur;
+                    cur = cur.l;
+                } else {
+                    cur = cur.r;
+                }
+            }
+            return ans;
+        }
+
+        private AVLNode<K, V> findLastNoBigIndex(K key) {
+            AVLNode<K, V> ans = null;
+            AVLNode<K, V> cur = root;
+            while (cur != null) {
+                if (key.compareTo(cur.k) == 0) {
+                    ans = cur;
+                    break;
+                } else if (key.compareTo(cur.k) < 0) {
+                    cur = cur.l;
+                } else {
+                    ans = cur;
+                    cur = cur.r;
+                }
+            }
+            return ans;
+        }
+
+        public int size() {
+            return size;
+        }
+
+        public boolean containsKey(K key) {
             if (key == null) {
                 return false;
             }
-
-            AVLNode<K, V> exist = findK(key);
-            return exist != null && key.compareTo(exist.k) == 0;
+            AVLNode<K, V> lastNode = findLastIndex(key);
+            return lastNode != null && key.compareTo(lastNode.k) == 0 ? true : false;
         }
 
         public void put(K key, V value) {
             if (key == null) {
                 return;
             }
-            AVLNode<K, V> exist = findK(key);
-            if (exist != null && key.compareTo(exist.k) == 0) {
-                exist.v = value;
+            AVLNode<K, V> lastNode = findLastIndex(key);
+            if (lastNode != null && key.compareTo(lastNode.k) == 0) {
+                lastNode.v = value;
             } else {
                 size++;
-                add(root, key, value);
+                root = add(root, key, value);
             }
         }
-
 
         public void remove(K key) {
             if (key == null) {
                 return;
             }
-            if (containKey(key)) {
+            if (containsKey(key)) {
                 size--;
-                delete(root, key);
+                root = delete(root, key);
             }
+        }
+
+        public V get(K key) {
+            if (key == null) {
+                return null;
+            }
+            AVLNode<K, V> lastNode = findLastIndex(key);
+            if (lastNode != null && key.compareTo(lastNode.k) == 0) {
+                return lastNode.v;
+            }
+            return null;
+        }
+
+        public K firstKey() {
+            if (root == null) {
+                return null;
+            }
+            AVLNode<K, V> cur = root;
+            while (cur.l != null) {
+                cur = cur.l;
+            }
+            return cur.k;
+        }
+
+        public K lastKey() {
+            if (root == null) {
+                return null;
+            }
+            AVLNode<K, V> cur = root;
+            while (cur.r != null) {
+                cur = cur.r;
+            }
+            return cur.k;
+        }
+
+        public K floorKey(K key) {
+            if (key == null) {
+                return null;
+            }
+            AVLNode<K, V> lastNoBigNode = findLastNoBigIndex(key);
+            return lastNoBigNode == null ? null : lastNoBigNode.k;
+        }
+
+        public K ceilingKey(K key) {
+            if (key == null) {
+                return null;
+            }
+            AVLNode<K, V> lastNoSmallNode = findLastNoSmallIndex(key);
+            return lastNoSmallNode == null ? null : lastNoSmallNode.k;
         }
 
     }

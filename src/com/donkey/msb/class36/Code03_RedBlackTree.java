@@ -49,6 +49,7 @@ public class Code03_RedBlackTree {
         treeMap.put(2, "Two");
         treeMap.put(5, "Five");
 
+
         System.out.println("插入后的TreeMap: " + treeMap);
         System.out.println("注意：键自动按升序排列！");
 

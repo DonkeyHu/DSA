@@ -111,7 +111,8 @@ public class Code02_SkipListMap {
             }
 
             SkipListNode<K, V> node = mostRightLessNodeInTree(k);
-            return node != null && node.nextNodes.get(0).isKeyEqual(k);
+            SkipListNode<K, V> next =  node.nextNodes.get(0);
+            return next != null && next.isKeyEqual(k);
         }
 
         public void remove(K k) {
@@ -135,6 +136,103 @@ public class Code02_SkipListMap {
                 }
             }
         }
+
+        public V get(K key) {
+            if (key == null) {
+                return null;
+            }
+            SkipListNode<K, V> less = mostRightLessNodeInTree(key);
+            SkipListNode<K, V> next = less.nextNodes.get(0);
+            return next != null && next.isKeyEqual(key) ? next.v : null;
+        }
+
+        public K firstKey() {
+            return head.nextNodes.get(0) != null ? head.nextNodes.get(0).k : null;
+        }
+
+        public K lastKey() {
+            SkipListNode<K,V> cur = head;
+            int level = maxLevel;
+            while (level >= 0) {
+                SkipListNode<K,V> next = cur.nextNodes.get(level);
+                // 记住链表的这种手法，next指针和当前指针
+                while (next != null) {
+                    cur = next;
+                    next = next.nextNodes.get(level);
+                }
+                level--;
+            }
+            return cur.k;
+        }
+
+        public K ceilingKey(K key) {
+            if (key == null) {
+                return null;
+            }
+            SkipListNode<K, V> less = mostRightLessNodeInTree(key);
+            SkipListNode<K, V> next = less.nextNodes.get(0);
+            return next != null ? next.k : null;
+        }
+
+        public K floorKey(K key) {
+            if (key == null) {
+                return null;
+            }
+            SkipListNode<K, V> less = mostRightLessNodeInTree(key);
+            SkipListNode<K, V> next = less.nextNodes.get(0);
+            return next != null && next.isKeyEqual(key) ? next.k : less.k;
+        }
+
+        public int size() {
+            return size;
+        }
+
+    }
+
+    // for test
+    public static void printAll(SkipListMap<String, String> obj) {
+        for (int i = obj.maxLevel; i >= 0; i--) {
+            System.out.print("Level " + i + " : ");
+            SkipListNode<String, String> cur = obj.head;
+            while (cur.nextNodes.get(i) != null) {
+                SkipListNode<String, String> next = cur.nextNodes.get(i);
+                System.out.print("(" + next.k + " , " + next.v + ") ");
+                cur = next;
+            }
+            System.out.println();
+        }
+    }
+
+    public static void main(String[] args) {
+        SkipListMap<String, String> test = new SkipListMap<>();
+        printAll(test);
+        System.out.println("======================");
+        test.put("A", "10");
+        printAll(test);
+        System.out.println("======================");
+        test.remove("A");
+        printAll(test);
+        System.out.println("======================");
+        test.put("E", "E");
+        test.put("B", "B");
+        test.put("A", "A");
+        test.put("F", "F");
+        test.put("C", "C");
+        test.put("D", "D");
+        printAll(test);
+        System.out.println("======================");
+        System.out.println(test.containKey("B"));
+        System.out.println(test.containKey("Z"));
+        System.out.println(test.firstKey());
+        System.out.println(test.lastKey());
+        System.out.println(test.floorKey("D"));
+        System.out.println(test.ceilingKey("D"));
+        System.out.println("======================");
+        test.remove("D");
+        printAll(test);
+        System.out.println("======================");
+        System.out.println(test.floorKey("D"));
+        System.out.println(test.ceilingKey("D"));
 
 
     }
