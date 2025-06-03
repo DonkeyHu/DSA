@@ -95,6 +95,10 @@ public class UnRecursiveTraversalBT {
         head.right = new Node(3);
         head.left.left = new Node(4);
         head.left.right = new Node(5);
+        head.left.right.left = new Node(8);
+        head.left.right.right = new Node(9);
+        head.left.right.right.right = new Node(10);
+        head.left.right.right.right.right = new Node(11);
         head.right.left = new Node(6);
         head.right.right = new Node(7);
 
