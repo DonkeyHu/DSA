@@ -2,8 +2,15 @@ package com.donkey.msb.class04;
 
 /**
  * 327. 区间和的个数
+ *
+ * 给定一个数组arr，和两个整数a和b（a<=b）
+ * 求arr中有多少个子数组，累加和在[a,b]这个范围上
+ * 返回达标的子数组数量
+ *
+ * （1）这题前缀和数组只是基本操作
+ * （2）最关键是归并的过程中，有个count的计算
  */
-public class CountOfRangeNum {
+public class Code01_CountOfRangeNum {
 
     public static int countRangeSum(int[] arr, int lower, int upper) {
         if (arr == null || arr.length == 0) {
@@ -33,6 +40,8 @@ public class CountOfRangeNum {
         int windowL = L;
         int windowR = L;
         int ans = 0;
+        // 这里是最关键最难理解的地方，想一想为什么windowL/windowR的范围只是[L，R]，相当于左边数组。但是遍历却是[M+1，R]?
+        // 这就是递归的奇妙之处，其实preSum[....,x]，由于这个递归关系，x前面的数都判断了是否在[x-upper,x-lower]这个范围了的
         // [windowL, windowR)
         for (int i = M + 1; i <= R; i++) {
             long min = arr[i] - upper;
