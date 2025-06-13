@@ -6,6 +6,8 @@ import java.util.List;
 /**
  * 单向链表反转
  * 双向链表反转
+ *
+ * 看似简单的题目，也是有点技巧的，要定义pre指针
  */
 public class ReverseList {
 
