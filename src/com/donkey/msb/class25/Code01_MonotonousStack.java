@@ -1,5 +1,6 @@
 package com.donkey.msb.class25;
 
+import java.util.Arrays;
 import java.util.Stack;
 
 /**
@@ -31,6 +32,14 @@ public class Code01_MonotonousStack {
             res[x][1] = -1;
         }
         return res;
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {3,5,1,10,6};
+        int[][] nearLess = getNearLess(arr);
+        for (int i = 0; i < nearLess.length; i++) {
+            System.out.println(Arrays.toString(nearLess[i]));
+        }
     }
 
 }
