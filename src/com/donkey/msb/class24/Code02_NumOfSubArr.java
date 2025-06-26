@@ -9,7 +9,8 @@ import java.util.LinkedList;
  * 返回arr中达标子数组的数量
  */
 public class Code02_NumOfSubArr {
-
+    // num = 5
+    //[8,2,1,1,3]
     public static int right(int[] arr, int num) {
         if (arr == null || arr.length == 0 || num < 0) {
             return 0;
@@ -34,6 +35,9 @@ public class Code02_NumOfSubArr {
 
 
     /**
+     *
+     *     // num = 5
+     *     //[8,2,1,1,3,8]
      * 两个结论：
      * （1）[L,R] 达标，则[L,R]内所有的子数组也达标  -> 所以R不用回退
      * （2）[L,R] 不达标，则[L,R右侧]都不达标，[L左侧, R]都不达标
