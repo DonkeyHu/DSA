@@ -33,6 +33,25 @@ public class Code01_Knapsack {
         return Math.max(p1, p2);
     }
 
+
+    public static int p(int[] weight, int[] values, int bag) {
+        int len = weight.length;
+        int[][] dp = new int[len + 1][bag + 1];
+        for (int i = len - 1; i >= 0; i--) {
+            for (int j = 0; j <= bag; j++) {
+                int p2 = dp[i + 1][j];
+                int p1 = 0;
+                if (j - weight[i] >= 0) {
+                    p1 = values[i] + dp[i + 1][j - weight[i]];
+                }
+                dp[i][j] = Math.max(p1, p2);
+            }
+        }
+
+        return dp[0][bag];
+    }
+
+
     public static int dp(int[] weight, int[] values, int bag) {
         if (weight == null || weight.length == 0 || values == null || values.length == 0 || values.length != weight.length || bag <= 0) {
             return 0;
@@ -61,7 +80,7 @@ public class Code01_Knapsack {
         int[] values = {2, 4, 6, 1, 8, 2, 7, 11};
         int bag = 18;
         System.out.println(way1(weight, values, bag));
-        System.out.println(dp(weight, values, bag));
+        System.out.println(p(weight, values, bag));
     }
 
 }

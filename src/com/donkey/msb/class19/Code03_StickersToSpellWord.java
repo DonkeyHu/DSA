@@ -36,9 +36,11 @@ public class Code03_StickersToSpellWord {
                 min = Math.min(min, process1(res, arr));
             }
         }
+        // 这里的1代表刚开始就用了一张贴纸
         return min + (min == Integer.MAX_VALUE ? 0 : 1);
     }
 
+    // 里面还是存在一些小技巧的，字符相减，字符加数字
     public static String minis(String rest, String sticker) {
         char[] c1 = rest.toCharArray();
         char[] c2 = sticker.toCharArray();
