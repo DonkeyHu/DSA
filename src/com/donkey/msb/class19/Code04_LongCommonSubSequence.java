@@ -6,7 +6,7 @@ package com.donkey.msb.class19;
  * <p>
  * 比如 ： str1 = “a12b3c456d”,str2 = “1ef23ghi4j56k”
  * 最长公共子序列是“123456”，所以返回长度6
- *
+ * <p>
  * 链接：https://leetcode.com/problems/longest-common-subsequence/
  */
 public class Code04_LongCommonSubSequence {
@@ -37,13 +37,31 @@ public class Code04_LongCommonSubSequence {
                 return process1(arr1, arr2, i - 1, j);
             }
         } else {
+            // 根据Gmini来解释更容易懂
+            // 情况 1：这两个字符相等 text1[i-1] == text2[j-1]
+            // 如果这两个字符相等，太棒了！这意味着我们找到了一个可以构成“公共子序列”的字符。
+            // 这个字符，必然可以被包含在我们想找的“最长公共子序列”中。
+            if (arr1[i] == arr2[j]) {
+                return 1 + process1(arr1, arr2, i - 1, j - 1);
+            } else {
+                // 情况 2：这两个字符不相等 text1[i-1] != text2[j-1]
+                // 如果这两个字符不相等，那么它们不可能同时出现在 text1[0...i-1] 和 text2[0...j-1] 的最长公共子序列的末尾。
+                //那么，这个最长公共子序列是哪里来的呢？有两种可能：
+                //它可能来自 text1 的前 i-1 个字符 和 text2 的前 j 个字符。相当于我们“扔掉”了 text1[i-1]，去寻找 LCS(text1[0...i-2], text2[0...j-1])。这个值正好是 dp[i-1][j]。
+                //它也可能来自 text1 的前 i 个字符 和 text2 的前 j-1 个字符。相当于我们“扔掉”了 text2[j-1]，去寻找 LCS(text1[0...i-1], text2[0...j-2])。这个值正好是 dp[i][j-1]。
+                //因为我们要找的是“最长”的，所以我们在这两种可能性中，选择一个较大值。
+                //dp[i][j] = max(dp[i-1][j], dp[i][j-1])
+                int y = process1(arr1, arr2, i - 1, j);
+                int z = process1(arr1, arr2, i, j - 1);
+                return Math.max(y, z);
+            }
             // 样本对应模型，讨论结尾的可能性
-            int p1 = process1(arr1, arr2, i - 1, j);
-            int p2 = process1(arr1, arr2, i, j - 1);
-            int p3 = arr1[i] == arr2[j] ? (1 + process1(arr1, arr2, i - 1, j - 1)) : 0;
-            // 其实有种可能是 int p4 = process1(arr1,arr2,i-1,j-1) 但p4一定小于p3的，所以
-            //int p3 = 1+ process1(arr1,arr2,i-1,j-1);
-            return Math.max(p3, Math.max(p1, p2));
+//            int p1 = process1(arr1, arr2, i - 1, j);
+//            int p2 = process1(arr1, arr2, i, j - 1);
+//            int p3 = arr1[i] == arr2[j] ? (1 + process1(arr1, arr2, i - 1, j - 1)) : 0;
+//            // 其实有种可能是 int p4 = process1(arr1,arr2,i-1,j-1) 但p4一定小于p3的，所以
+//            //int p3 = 1+ process1(arr1,arr2,i-1,j-1);
+//            return Math.max(p3, Math.max(p1, p2));
         }
     }
 
