@@ -4,7 +4,7 @@ package com.donkey.leetcode;
 import java.util.*;
 
 /**
- * 字符串如何按自然序排序出来？
+ * 字符串如何按自然序排序出来？ 直接用API..
  */
 public class Q049_GroupAnagrams {
 
@@ -34,6 +34,7 @@ public class Q049_GroupAnagrams {
     public static String sortStr(String str) {
         char[] chars = str.toCharArray();
         Arrays.sort(chars);
+        // 这里要注意，不能用chars.toString()
         String res = String.valueOf(chars);
         return res;
     }
