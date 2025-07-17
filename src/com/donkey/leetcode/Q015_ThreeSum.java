@@ -6,6 +6,9 @@ import java.util.List;
 
 /**
  * 15. 三数之和
+ *
+ *  注意，这题返回的是数组的值，不是下标，所以有个去重的过程
+ *
  */
 public class Q015_ThreeSum {
 
@@ -73,6 +76,7 @@ public class Q015_ThreeSum {
             } else if (num[begin] + num[end] > target) {
                 end--;
             } else {
+                // 这里是去重的过程
                 if (begin > start && num[begin] == num[begin - 1]) {
                     begin++;
                     continue;
