@@ -2,6 +2,8 @@ package com.donkey.leetcode;
 
 /**
  * 4. 寻找两个正序数组的中位数
+ *
+ * getUpMedian这个方法我都要画格子才能分析清楚
  */
 public class Q004_FindMedianSortedArrays {
 
