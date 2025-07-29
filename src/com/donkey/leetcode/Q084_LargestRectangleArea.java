@@ -2,6 +2,9 @@ package com.donkey.leetcode;
 
 import java.util.Stack;
 
+/**
+ * 可以想到是单调栈，从小到大的栈
+ */
 public class Q084_LargestRectangleArea {
 
     public static int largestRectangleArea(int[] heights) {
