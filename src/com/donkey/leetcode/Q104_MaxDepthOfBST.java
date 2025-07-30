@@ -1,8 +1,6 @@
 package com.donkey.leetcode;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 public class Q104_MaxDepthOfBST {
 
@@ -26,19 +24,30 @@ public class Q104_MaxDepthOfBST {
     }
 
     public int maxDepth(TreeNode root) {
-        Stack<TreeNode> stack = new Stack<>();
-        TreeNode cur = root;
-        int depth = 0;
-        while (cur != null || !stack.isEmpty()) {
-            if (cur != null) {
-                depth = Math.max(depth, stack.size());
-                stack.add(cur);
-                cur = cur.left;
-            } else {
-                TreeNode x = stack.pop();
-                cur = x.right;
-            }
+        if (root == null) {
+            return 0;
         }
+        if (root.left == null && root.right == null) {
+            return 1;
+        }
+
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        int depth = 0;
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                TreeNode n = queue.poll();
+                if (n.left != null) {
+                    queue.add(n.left);
+                }
+                if (n.right != null) {
+                    queue.add(n.right);
+                }
+            }
+            depth++;
+        }
+
         return depth;
     }
 
