@@ -4,6 +4,8 @@ package com.donkey.leetcode;
  * 19. 删除链表的倒数第N个节点
  * <p>
  * 我开始的思路是翻转链表，原来大可不必.....
+ *
+ * 注意边界条件：R先走N，L再和R一起走，直至R为null
  */
 public class Q019_RemoveNthFromEnd {
     public static class ListNode {

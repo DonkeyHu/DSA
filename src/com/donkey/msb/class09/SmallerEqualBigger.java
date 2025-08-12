@@ -1,5 +1,7 @@
 package com.donkey.msb.class09;
 
+import java.util.Arrays;
+
 /**
  * 将单向链表按某值划分成左边小、中间相等、右边大的形式
  * <p>
@@ -119,27 +121,68 @@ public class SmallerEqualBigger {
         return sh != null ? sh : (eh != null ? eh : bh);
     }
 
-    public static void printLinkedList(Node head){
+    public static void printLinkedList(Node head) {
         System.out.println("Linked List: ");
-        while (head != null){
-            System.out.print(head.value+" ");
+        while (head != null) {
+            System.out.print(head.value + " ");
             head = head.next;
         }
         System.out.println();
     }
 
     public static void main(String[] args) {
-        Node head1 = new Node(7);
-        head1.next = new Node(9);
-        head1.next.next = new Node(4);
-        head1.next.next.next = new Node(8);
-        head1.next.next.next.next = new Node(5);
-        head1.next.next.next.next.next = new Node(4);
-        head1.next.next.next.next.next.next = new Node(5);
-        printLinkedList(head1);
+//        Node head1 = new Node(7);
+//        head1.next = new Node(9);
+//        head1.next.next = new Node(4);
+//        head1.next.next.next = new Node(8);
+//        head1.next.next.next.next = new Node(5);
+//        head1.next.next.next.next.next = new Node(4);
+//        head1.next.next.next.next.next.next = new Node(5);
+//        printLinkedList(head1);
 //         head1 = listPartition1(head1, 5);
-        head1 = listPartition2(head1, 5);
-        printLinkedList(head1);
+//        head1 = listPartition2(head1, 5);
+//        printLinkedList(head1);
+        int[] arr = {8,3,5,2,10,4,4,9,7,5,1,5};
+        partition(arr,5);
+    }
+
+    public static void p(int[] arr, int p) {
+        int R = arr.length;
+        int L = -1;
+        int index = 0;
+        while (index < R) {
+            if (arr[index] < p) {
+                s(arr, ++L, index++);
+            } else if (arr[index] == p) {
+                index++;
+            } else {
+                s(arr, index, --R);
+            }
+        }
+        System.out.println("L -->" + L);
+        System.out.println("R -->" + R);
+        System.out.println(Arrays.toString(arr));
+    }
+
+    public static void s(int[] arr, int i, int j) {
+        int tmp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = tmp;
+    }
+
+    public static int partition(int[] arr, int num) {
+        if (arr == null || arr.length < 2) {
+            return -1;
+        }
+        int border = -1;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] <= num) {
+                s(arr, ++border, i);
+            }
+        }
+        System.out.println("L -->" + border);
+        System.out.println(Arrays.toString(arr));
+        return border;
     }
 
 }
