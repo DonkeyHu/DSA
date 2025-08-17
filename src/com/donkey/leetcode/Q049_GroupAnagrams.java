@@ -4,6 +4,7 @@ package com.donkey.leetcode;
 import java.util.*;
 
 /**
+ * 思路居然是首先对每个字符串排序一下
  * 字符串如何按自然序排序出来？ 直接用API..
  */
 public class Q049_GroupAnagrams {
